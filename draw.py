@@ -21,8 +21,8 @@ for participant in info:
     user = participant[1]
     corrects = int(participant[-1].split(' / ')[0])
     if user in participants:
-        participants[user] = max(participants[user], corrects)
-    else: participants[user] = corrects
+        participants[user] = max(participants[user], corrects + 3)
+    else: participants[user] = corrects + 3
     
 # 추첨 명단 제외 리스트 
 except_list = []
@@ -47,4 +47,5 @@ print(f'{len(participants)}명 {list(participants.keys())}')
 # 당첨자
 winner = np.random.choice(list(participants.keys()), winner_num, replace = False, p = winner_percent) \
     if winner_num < len(participants) else list(participants.keys())
+winner.sort()
 print(f'당첨자: {winner}')
